@@ -23,8 +23,7 @@ public class GroupCountByType implements Commandable {
 
     @Override
     public boolean execute(String argument) {
-      TicketType ticketType = consoleManager.readEnumType(TicketType.class,"Enter ticket type");
-        collectionManager.assort(ticketType);
+        collectionManager.assort();
         PrintMsg("the number of elements is displayed\n");
         return true;
     }

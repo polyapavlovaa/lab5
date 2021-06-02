@@ -18,7 +18,6 @@ public class Reader {
         System.out.println(msg);
     }
 
-
     public static void PrintErr(String msg) {
         System.out.println("Error: " + msg);
     }
@@ -122,15 +121,15 @@ public class Reader {
                 s.append(enumConstants[i].toString());
             }
 
-            PrintMsg("Values (" + s.toString() + "):");
+            PrintMsg("Values (" + s + "):");
             String buffer = scanner.nextLine().trim().toUpperCase();
             if (!buffer.isEmpty()) {
                 try {
                     out = Enum.valueOf(enumeration, buffer);
                 } catch (IllegalArgumentException e) {
-                    PrintMsg("Enter one of the available values :/ (" + s.toString() + "):");
+                    PrintMsg("Enter one of the available values :/ (" + s + "):");
                 }
-            } else PrintErr("Please, enter a non-null value\n");
+            } else PrintErr("Please, enter a not empty or null value\n");
         }
         return out;
     }
