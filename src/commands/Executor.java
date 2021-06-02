@@ -1,5 +1,6 @@
 package commands;
 
+import exceptions.LackOfAccessException;
 import exceptions.NoSuchCommandException;
 import lib.*;
 
@@ -26,6 +27,7 @@ public class Executor {
 
     /**
      * execute script file with commands
+     *
      * @param file script name
      * @throws NoSuchCommandException if no any available command to execute
      */
@@ -80,6 +82,7 @@ public class Executor {
 
     /**
      * go to interactive console mode
+     *
      * @throws NoSuchCommandException if command is not available to execution
      */
 
@@ -91,9 +94,14 @@ public class Executor {
             if (cmd[0].trim().equals("execute_script")) {
                 if (!cmd[1].trim().equals("")) {
                     Path scriptPath = Paths.get(cmd[1].trim());
-                    if (Files.isExecutable(scriptPath)) {
-                        executeScript(cmd[1].trim());
+                    if (!Files.isExecutable(scriptPath)) {
+                        try {
+                            throw new LackOfAccessException();
+                        } catch (LackOfAccessException e) {
+                            PrintErr(" no execute rights");
+                        }
                     }
+                    executeScript(cmd[1].trim());
                     script.clear();
                 } else {
                     PrintErr("enter file name");

@@ -3,6 +3,8 @@ package lib;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
+import exceptions.EmptyIOException;
+import exceptions.IncorrectValueException;
 import exceptions.LackOfAccessException;
 import models.Location;
 import models.Ticket;
@@ -41,7 +43,7 @@ public class FileManager {
 
         Gson gson = new Gson();
         try {
-            if (!Files.isReadable(Paths.get(path))){
+            if (!Files.isReadable(Paths.get(path))) {
                 throw new LackOfAccessException();
             }
             BufferedReader reader = new BufferedReader(new FileReader(path));
@@ -60,10 +62,9 @@ public class FileManager {
             PrintErr("file is empty");
         } catch (JsonParseException e) {
             PrintErr("Another collection in the file");
-        }catch (LackOfAccessException e){
+        } catch (LackOfAccessException e) {
             PrintErr("no read rights");
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             PrintErr("file access error");
         }
         return new Vector<>();
@@ -82,25 +83,22 @@ public class FileManager {
 
         Gson gson = new Gson();
         try {
-            if (Files.isWritable(Paths.get(path))){
+            if (!Files.isWritable(Paths.get(path))) {
                 throw new LackOfAccessException();
             }
             BufferedWriter writer = new BufferedWriter(new FileWriter(path));
             writer.write(gson.toJson(tickets));
             PrintMsg("Collection saved successfully\n");
             writer.close();
-        } catch (LackOfAccessException e){
+        } catch (LackOfAccessException e) {
             PrintErr("no write rights");
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             PrintErr("there is no file to save");
         }
     }
 
-    public boolean isGoodData() {
-        Vector<Ticket> tickets = readData();
+    public void checkData(Vector<Ticket> tickets) {
         for (Ticket ticket : tickets) {
-
             int id = ticket.getId(); //>0
             String name = ticket.getName(); //not null/empty
             LocalDateTime time = ticket.getCreationDate(); //not null
@@ -122,18 +120,29 @@ public class FileManager {
             Integer zLoc = location.getZ(); //not null
             String nameLoc = location.getName(); //not null
 
-            if (name.isEmpty() | nameV.isEmpty() | xLoc == null | yLoc == null | zLoc == null | nameLoc == null | zipCode == null | time == null | y == null) {
+            try {
+                if (name.equals("") | nameV.equals("") | xLoc == null | yLoc == null | zLoc == null | nameLoc == null | zipCode == null | time == null | y == null) {
+                    throw new EmptyIOException();
+                }
+                if (id < 0 | price < 0 | idV < 0 | capacity < 0) {
+                    PrintMsg(" negative or zero value");
+                    throw new IncorrectValueException();
+                }
+                if (x > 518 | y > 332) {
+                    PrintMsg("value is greater than the maximum (x_max=518; y_max=332)");
+                    throw new IncorrectValueException();
+                }
+            } catch (EmptyIOException e) {
                 PrintErr(" empty/null value");
-                return false;
-            }
-            if (id < 0 | price < 0 | idV < 0 | capacity < 0) {
-                PrintErr(" negative or zero value");
-                return false;
-            }
-            if (x > 518 | y > 332) {
-                PrintErr("value is greater than the maximum (x_max=518;y_max=332)");
+                PrintMsg("Working with the collection will be incorrect.+ \n " +
+                         "Exit the program.");
+                System.exit(0);
+            } catch (IncorrectValueException e) {
+                PrintErr(" incorrect value");
+                PrintMsg("Working with the collection will be incorrect.+ \n " +
+                        "Exit the program.");
+                System.exit(0);
             }
         }
-        return true;
     }
 }
