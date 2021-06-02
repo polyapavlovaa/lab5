@@ -3,6 +3,9 @@ package commands;
 import exceptions.NoSuchCommandException;
 import lib.*;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 import static lib.ConsoleManager.PrintErr;
@@ -14,11 +17,11 @@ public class Executor {
     private final List<String> script;
 
 
-    public Executor(Scanner scanner, DataReader dataReader, DataWriter dataWriter) {
+    public Executor(Scanner scanner, FileManager fileManager) {
         this.scanner = scanner;
         script = new ArrayList<>();
         StorageForCommands commands = new StorageForCommands();
-        commandsList = commands.getCommandsList(dataReader, dataWriter, scanner);
+        commandsList = commands.getCommandsList(fileManager, scanner);
     }
 
     /**
@@ -87,7 +90,10 @@ public class Executor {
             String[] cmd = (scanner.nextLine().trim() + " ").split(" ", 2);
             if (cmd[0].trim().equals("execute_script")) {
                 if (!cmd[1].trim().equals("")) {
-                    executeScript(cmd[1].trim());
+                    Path scriptPath = Paths.get(cmd[1].trim());
+                    if (Files.isExecutable(scriptPath)) {
+                        executeScript(cmd[1].trim());
+                    }
                     script.clear();
                 } else {
                     PrintErr("enter file name");

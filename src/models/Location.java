@@ -22,5 +22,19 @@ public class Location {
         this.name = name;
     }
 
+    public Float getX() {
+        return x;
+    }
 
+    public Integer getY() {
+        return y;
+    }
+
+    public Integer getZ() {
+        return z;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

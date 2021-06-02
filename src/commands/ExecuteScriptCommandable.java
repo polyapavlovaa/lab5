@@ -11,13 +11,13 @@ import static lib.Reader.PrintMsg;
 // another (should be) unfinished script executor
 public class ExecuteScriptCommandable extends Console
         implements Commandable {
-    private DataReader reader;
+    private FileManager fileManager;
     private StorageForCommands storage;
     private final ConsoleManager consoleManager;
     private final List<String> scripts;
 
-    public ExecuteScriptCommandable(DataReader reader, DataWriter writer, Scanner scanner, ConsoleManager consoleManager) {
-        super(scanner, writer, reader);
+    public ExecuteScriptCommandable(FileManager fileManager, Scanner scanner, ConsoleManager consoleManager) {
+        super(scanner, fileManager);
         scripts = new Vector<>();
         this.consoleManager = consoleManager;
     }

@@ -13,8 +13,8 @@ public class StorageForCommands {
         commandsList = new ArrayList<>();
     }
 
-    public List<Commandable> getCommandsList(DataReader dataReader, DataWriter dataWriter, Scanner scanner){
-        CollectionManager collectionManager = new CollectionManager(dataReader,dataWriter);
+    public List<Commandable> getCommandsList(FileManager fileManager, Scanner scanner){
+        CollectionManager collectionManager = new CollectionManager(fileManager);
         ConsoleManager consoleManager = new ConsoleManager(scanner);
         commandsList.add(new Add(collectionManager,consoleManager));
         commandsList.add(new AddMin(collectionManager,consoleManager));
