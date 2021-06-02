@@ -31,6 +31,22 @@ public class Venue {
         return id;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public VenueType getType() {
+        return type;
+    }
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         return "Venue{" +

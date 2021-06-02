@@ -16,7 +16,7 @@ public class ConsoleManager extends Reader{
     }
 
     public Ticket getTicketObj(Integer Id) {
-        PrintMsg("Ticket ID: " + Integer.toString(Id));
+        PrintMsg("Ticket ID: " + Id);
         String name = readString("Enter your name for the ticket: ");
 
 //        coordinates (x,y)
@@ -64,10 +64,8 @@ public class ConsoleManager extends Reader{
         return ticket;
     }
 
-
-
     private Venue getVenueObj(Integer venueID) {
-        PrintMsg("Venue ID: " + Long.toString(venueID));
+        PrintMsg("Venue ID: " + venueID);
 
         String venueName = readString("Enter a venue name:");
         Integer capacity;

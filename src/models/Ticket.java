@@ -40,6 +40,20 @@ public class Ticket {
         this.venue = venue;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ticket ticket = (Ticket) o;
+        return id == ticket.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
     public LocalDateTime getCreationDate() {
         return creationDate;
     }
@@ -56,19 +70,17 @@ public class Ticket {
         return type;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Ticket ticket = (Ticket) o;
-        return id == ticket.id;
+    public Coordinates getCoordinates() {
+        return coordinates;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public int getPrice() {
+        return price;
     }
 
+    public Venue getVenue() {
+        return venue;
+    }
 
     @Override
     public String toString() {

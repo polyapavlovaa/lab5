@@ -1,7 +1,6 @@
 package lib;
 
-import models.Ticket;
-import models.TicketType;
+import models.*;
 
 import java.time.ZonedDateTime;
 import java.util.*;
@@ -10,18 +9,17 @@ import static lib.ConsoleManager.PrintMsg;
 
 public class CollectionManager {
     private Vector<Ticket> tickets;
-    private final DataWriter dataWriter;
-    private final DataReader dataReader;
+    private final FileManager fileManager;
 
 
     /*public CollectionManager(){
     }*/
 
 
-    public CollectionManager(DataReader dataReader, DataWriter dataWriter) {
-        this.dataReader = dataReader;
-        this.tickets = dataReader.readData();
-        this.dataWriter = dataWriter;
+    public CollectionManager(FileManager fileManager) {
+        this.fileManager = fileManager;
+        this.tickets = fileManager.readData();
+        fileManager.checkData(tickets);
     }
 
     public String getInformation() {
@@ -30,7 +28,7 @@ public class CollectionManager {
         String size = String.valueOf(tickets.size());
         String res = "";
         res += "\n" + "collection type: " + dataSimpleName + "\n";
-        res += "collection creation time: " + creationDate.toString() + "\n";
+        res += "collection creation time: " + creationDate + "\n";
         res += "number of items in the collection: " + size + "\n";
         return res;
     }
@@ -49,7 +47,7 @@ public class CollectionManager {
     }
 
     public void save() {
-        dataWriter.saveData(tickets);
+        fileManager.saveData(tickets);
     }
 
     public Integer getID() {
@@ -128,7 +126,7 @@ public class CollectionManager {
         StringBuilder list = new StringBuilder();
         for (Ticket t : tickets) {
             if (t.getName().startsWith(substring.trim())) {
-                list.append(t.toString()).append("\n");
+                list.append(t).append("\n");
             }
         }
         return list.toString();
@@ -138,21 +136,38 @@ public class CollectionManager {
         StringBuilder list = new StringBuilder();
         for (Ticket t : tickets) {
             if (t.getName().contains(substring.trim())) {
-                list.append(list).append(t.toString()).append("\n");
+                list.append(list).append(t).append("\n");
             }
         }
         return list.toString();
     }
 
-    public void assort(TicketType ticketType) {
+//      too lazy to think about how to make it more abstract
+//       maybe this method will be changed
+    public void assort() {
 
-        List<String> res = new Vector<>();
+        Vector<Ticket> res1 = new Vector<>();
+        Vector<Ticket> res2 = new Vector<>();
+        Vector<Ticket> res3 = new Vector<>();
         for (Ticket t : tickets) {
-            if (t.getType().equals(ticketType)) {
-                res.add(t.toString());
+            if (t.getType().equals(TicketType.USUAL)) {
+                res1.add(t);
             }
-            int count = res.size();
-            PrintMsg(Integer.toString(count));
+            if (t.getType().equals(TicketType.CHEAP)) {
+                res2.add(t);
+            }
+            if (t.getType().equals(TicketType.BUDGETARY)) {
+                res3.add(t);
+            }
         }
+        System.out.println(res1);
+        PrintMsg("Number of elements " +"(type - "+ TicketType.USUAL + "): " + res1.size());
+
+        System.out.println(res2);
+        PrintMsg("Number of elements " +"(type - "+ TicketType.CHEAP + "): " + res2.size());
+
+        System.out.println(res3);
+        PrintMsg("Number of elements " +"(type - "+ TicketType.BUDGETARY + "): " + res3.size());
+
     }
 }

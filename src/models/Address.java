@@ -17,5 +17,15 @@ public class Address {
         this.town = town;
     }
 
+    public String getStreet() {
+        return street;
+    }
 
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public Location getTown() {
+        return town;
+    }
 }
