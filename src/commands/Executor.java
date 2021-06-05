@@ -93,7 +93,7 @@ public class Executor {
             String[] cmd = (scanner.nextLine().trim() + " ").split(" ", 2);
             if (cmd[0].trim().equals("execute_script")) {
                 if (!cmd[1].trim().equals("")) {
-                    Path scriptPath = Paths.get(cmd[1].trim());
+                    Path scriptPath = Paths.get("script.txt");
                     if (!Files.isExecutable(scriptPath)) {
                         try {
                             throw new LackOfAccessException();

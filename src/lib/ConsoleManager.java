@@ -15,6 +15,12 @@ public class ConsoleManager extends Reader{
         super(scanner);
     }
 
+    /**
+     * getter for the ticket object
+     * @param Id field in the ticket object
+     * @return ticket object
+     */
+
     public Ticket getTicketObj(Integer Id) {
         PrintMsg("Ticket ID: " + Id);
         String name = readString("Enter your name for the ticket: ");
@@ -63,6 +69,12 @@ public class ConsoleManager extends Reader{
         Ticket ticket = new Ticket(Id, name,time, coordinates,price, ticketType, getVenueObj(Id));
         return ticket;
     }
+
+    /**
+     * getter for the venue obj
+     * @param venueID field in the venue object
+     * @return venue obj
+     */
 
     private Venue getVenueObj(Integer venueID) {
         PrintMsg("Venue ID: " + venueID);

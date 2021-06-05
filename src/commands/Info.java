@@ -23,6 +23,6 @@ public class Info implements Commandable {
 
     @Override
     public String getDescription() {
-        return "print information about the collection to the stdout: type, date of initialization, number of elements";
+        return " print information about the collection to the stdout: type, date of initialization, number of elements\n";
     }
 }

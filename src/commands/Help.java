@@ -20,7 +20,7 @@ public class Help implements Commandable {
     @Override
     public boolean execute(String argument) {
         StringBuilder res = new StringBuilder();
-        PrintMsg("\nexecute_script - read and execute the script from the specified file");
+        PrintMsg("\nexecute_script - (file_name) read and execute the script from the specified file\n");
         for (Commandable commandable : commandsAvailable){
             res.append(commandable.getName()).append(" - ").append(commandable.getDescription()).append("\n");
         }
@@ -30,7 +30,7 @@ public class Help implements Commandable {
 
     @Override
     public String getDescription() {
-        return "display help for available commands";
+        return " display help for available commands\n";
     }
 
     public List<Commandable> getCommandsAvailable() {

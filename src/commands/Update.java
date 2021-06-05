@@ -48,6 +48,6 @@ public class Update implements Commandable {
 
     @Override
     public String getDescription() {
-        return " update the value of the collection element whose id is equal to the given";
+        return " (id) update the value of the collection element whose id is equal to the given\n";
     }
 }

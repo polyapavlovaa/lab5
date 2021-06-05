@@ -1,25 +1,17 @@
 package lib;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonParseException;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
-import exceptions.EmptyIOException;
-import exceptions.IncorrectValueException;
-import exceptions.LackOfAccessException;
-import models.Location;
-import models.Ticket;
-import models.Venue;
+import exceptions.*;
+import models.*;
 
 import java.io.*;
 import java.lang.reflect.Type;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.time.LocalDateTime;
-import java.util.NoSuchElementException;
-import java.util.Vector;
+import java.util.*;
 
-import static lib.Reader.PrintErr;
-import static lib.Reader.PrintMsg;
+import static lib.Reader.*;
 
 public class FileManager {
     private final String path;
@@ -54,7 +46,7 @@ public class FileManager {
                 return new Vector<>();
             }
             Vector<Ticket> data = gson.fromJson(json.trim(), dataType);
-            PrintMsg("Collection loaded successfully");
+            PrintMsg("Collection read from file");
             return data;
         } catch (FileNotFoundException e) {
             PrintErr(" file not found");
@@ -97,6 +89,11 @@ public class FileManager {
         }
     }
 
+    /**
+     * additional check if the collection in the file was changed manually
+     * @param tickets collection<Ticket></Ticket>
+     */
+
     public void checkData(Vector<Ticket> tickets) {
         for (Ticket ticket : tickets) {
             int id = ticket.getId(); //>0
@@ -129,7 +126,7 @@ public class FileManager {
                     throw new IncorrectValueException();
                 }
                 if (x > 518 | y > 332) {
-                    PrintMsg("value is greater than the maximum (x_max=518; y_max=332)");
+                    PrintMsg(" value is greater than the maximum (x_max=518; y_max=332)");
                     throw new IncorrectValueException();
                 }
             } catch (EmptyIOException e) {

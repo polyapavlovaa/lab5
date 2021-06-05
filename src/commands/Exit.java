@@ -17,6 +17,6 @@ public class Exit implements Commandable {
 
     @Override
     public String getDescription() {
-        return "end the program (without saving to file)";
+        return " end the program (without saving to file)\n";
     }
 }

@@ -38,6 +38,6 @@ public class FilterStartsWithName implements Commandable {
 
     @Override
     public String getDescription() {
-        return " display elements whose name field value begins with a given substring";
+        return " (name) display elements whose name field value begins with a given substring\n";
     }
 }

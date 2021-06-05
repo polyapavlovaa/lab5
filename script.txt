@@ -1,3 +1,5 @@
 help
 info
 show
+groupcountbytype
+filtercontainsname um

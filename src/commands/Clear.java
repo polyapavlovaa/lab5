@@ -23,6 +23,6 @@ public class Clear implements Commandable {
 
     @Override
     public String getDescription() {
-        return "clear collection";
+        return " clear collection\n";
     }
 }

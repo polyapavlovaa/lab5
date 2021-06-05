@@ -30,6 +30,6 @@ public class GroupCountByType implements Commandable {
 
     @Override
     public String getDescription() {
-        return " group the elements of the collection by the value of the type field, display the number of elements in the group";
+        return " group the elements of the collection by the value of the type field, display the number of elements in the group\n";
     }
 }

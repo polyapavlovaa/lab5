@@ -23,6 +23,6 @@ public class Show implements Commandable {
 
     @Override
     public String getDescription() {
-        return "print to stdout all elements of the collection in string representation";
+        return " print to stdout all elements of the collection in string representation\n";
     }
 }

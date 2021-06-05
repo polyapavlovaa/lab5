@@ -37,6 +37,6 @@ public class FilterContainsName implements Commandable {
 
     @Override
     public String getDescription() {
-        return " display elements whose name field value contains the given substring";
+        return " (name) display elements whose name field value contains the given substring\n";
     }
 }

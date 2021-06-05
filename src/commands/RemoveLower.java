@@ -34,6 +34,6 @@ public class RemoveLower implements Commandable {
 
     @Override
     public String getDescription() {
-        return "remove all elements from the collection that are less than the given one";
+        return " remove all elements from the collection that are less than the given one\n";
     }
 }

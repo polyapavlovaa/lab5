@@ -24,6 +24,6 @@ public class Save implements Commandable {
 
     @Override
     public String getDescription() {
-        return "save collection to file";
+        return " save collection to file\n";
     }
 }

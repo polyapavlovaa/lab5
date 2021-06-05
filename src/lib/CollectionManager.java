@@ -15,12 +15,23 @@ public class CollectionManager {
     /*public CollectionManager(){
     }*/
 
+    /**
+     * Constructor
+     * check fields in collection
+     * @param fileManager to read collection from file
+     */
+
 
     public CollectionManager(FileManager fileManager) {
         this.fileManager = fileManager;
         this.tickets = fileManager.readData();
         fileManager.checkData(tickets);
     }
+
+    /**
+     *
+     * @return information about collection
+     */
 
     public String getInformation() {
         String dataSimpleName = tickets.getClass().getSimpleName();
@@ -33,6 +44,11 @@ public class CollectionManager {
         return res;
     }
 
+    /**
+     *
+     * @return elements of the vector in string format
+     */
+
     public String getStringElements() {
         StringBuilder list = new StringBuilder();
         tickets.forEach(t ->
@@ -41,14 +57,27 @@ public class CollectionManager {
         return list.toString();
     }
 
+    /**
+     * getter for collection that have read from file (i hope)
+     * @return collection
+     */
 
     public Vector<Ticket> getTickets() {
         return tickets;
     }
 
+    /**
+     * save collection to file
+     */
+
     public void save() {
         fileManager.saveData(tickets);
     }
+
+    /**
+     * getter for id
+     * @return generated id
+     */
 
     public Integer getID() {
         int maxID = 0;
@@ -61,6 +90,11 @@ public class CollectionManager {
         return maxID + 1;
     }
 
+    /**
+     * change ticket object by id
+     * @param update ticket object
+     */
+
     public void update(Ticket update) {
         Vector<Ticket> res = new Vector<>();
         for (Ticket t : tickets) {
@@ -72,6 +106,11 @@ public class CollectionManager {
         tickets = res;
     }
 
+    /**
+     * add item to collection
+     * @param ticket object
+     */
+
 
     public void addItem(Ticket ticket) {
         for (Ticket t : tickets) {
@@ -80,6 +119,11 @@ public class CollectionManager {
             return;
         }
     }
+
+    /**
+     * add new item to collection with min id
+     * @param ticket object
+     */
 
 
     public void addMin(Ticket ticket) {
@@ -92,6 +136,12 @@ public class CollectionManager {
         tickets.add(ticket);
     }
 
+    /**
+     * check id
+     * @param ID of ticket/venue object
+     * @return boolean value: true if id's are equal to each other
+     */
+
 
     public boolean isEqualId(Integer ID) {
         for (Ticket t : tickets) {
@@ -101,6 +151,11 @@ public class CollectionManager {
         }
         return false;
     }
+
+    /**
+     * remove item by id
+     * @param id id to compare
+     */
 
 
     public void removeID(Integer id) {
@@ -112,6 +167,11 @@ public class CollectionManager {
         }
     }
 
+    /**
+     * remove item with lower id
+     * @param ticket object
+     */
+
     public void removeLower(Ticket ticket) {
         for (Ticket t : tickets) {
             if (ticket.getId() > t.getId()) {
@@ -121,6 +181,12 @@ public class CollectionManager {
         }
         tickets.remove(ticket);
     }
+
+    /**
+     * find substring in ticket's name (in start)
+     * @param substring to find in field name
+     * @return object with this substring in name
+     */
 
     public String startsWithSubstring(String substring) {
         StringBuilder list = new StringBuilder();
@@ -132,6 +198,12 @@ public class CollectionManager {
         return list.toString();
     }
 
+    /**
+     * find substring in ticket's name
+     * @param substring to find in field name
+     * @return object with this substring in name
+     */
+
     public String containsSomeSubstring(String substring) {
         StringBuilder list = new StringBuilder();
         for (Ticket t : tickets) {
@@ -141,6 +213,10 @@ public class CollectionManager {
         }
         return list.toString();
     }
+
+    /**
+     * group collection by enum type
+     */
 
 //      too lazy to think about how to make it more abstract
 //       maybe this method will be changed

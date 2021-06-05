@@ -30,6 +30,6 @@ public class Add implements Commandable {
 
     @Override
     public String getDescription() {
-        return "add new element to collection";
+        return "add new element to collection\n";
     }
 }

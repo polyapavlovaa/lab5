@@ -42,6 +42,6 @@ public class Remove implements Commandable {
 
     @Override
     public String getDescription() {
-        return "remove an item from the collection by its id";
+        return " (id) remove an item from the collection by its id\n";
     }
 }

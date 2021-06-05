@@ -36,6 +36,6 @@ public class AddMin implements Commandable {
 
     @Override
     public String getDescription() {
-        return "add a new item to a collection if its value is less than the smallest item in this collection";
+        return " add a new item to a collection if its value is less than the smallest item in this collection\n";
     }
 }

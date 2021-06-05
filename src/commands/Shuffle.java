@@ -26,6 +26,6 @@ public class Shuffle implements Commandable {
 
     @Override
     public String getDescription() {
-        return "shuffle the elements of the collection at random";
+        return " shuffle the elements of the collection at random\n";
     }
 }
